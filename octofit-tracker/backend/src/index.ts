@@ -12,8 +12,9 @@ const DB_NAME = process.env.DB_NAME || 'octofit_db'
 const MONGO_URI = `mongodb://${MONGO_HOST}:${MONGO_PORT}/${DB_NAME}`
 
 const CODESPACE_NAME = process.env.CODESPACE_NAME
-const API_HOST = CODESPACE_NAME ? `${CODESPACE_NAME}-8000.githubpreview.dev` : `localhost`
-const API_BASE_URL = `http://${API_HOST}:${PORT}`
+const API_BASE_URL = CODESPACE_NAME
+  ? `https://${CODESPACE_NAME}-8000.app.github.dev`
+  : `http://localhost:${PORT}`
 
 app.use('/api', apiRouter)
 
