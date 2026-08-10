@@ -5,11 +5,13 @@ export default function Activities() {
   const [activities, setActivities] = useState([])
   const [error, setError] = useState('')
 
+  const endpoint = `${getApiBaseUrl()}/activities`
+
   useEffect(() => {
-    fetchApi('activities')
+    fetchApi(endpoint)
       .then(setActivities)
       .catch((err) => setError(err.message))
-  }, [])
+  }, [endpoint])
 
   return (
     <section>

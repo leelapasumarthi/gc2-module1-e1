@@ -5,11 +5,13 @@ export default function Teams() {
   const [teams, setTeams] = useState([])
   const [error, setError] = useState('')
 
+  const endpoint = `${getApiBaseUrl()}/teams`
+
   useEffect(() => {
-    fetchApi('teams')
+    fetchApi(endpoint)
       .then(setTeams)
       .catch((err) => setError(err.message))
-  }, [])
+  }, [endpoint])
 
   return (
     <section>

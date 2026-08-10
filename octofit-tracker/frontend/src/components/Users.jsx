@@ -5,11 +5,13 @@ export default function Users() {
   const [users, setUsers] = useState([])
   const [error, setError] = useState('')
 
+  const endpoint = `${getApiBaseUrl()}/users`
+
   useEffect(() => {
-    fetchApi('users')
+    fetchApi(endpoint)
       .then(setUsers)
       .catch((err) => setError(err.message))
-  }, [])
+  }, [endpoint])
 
   return (
     <section>

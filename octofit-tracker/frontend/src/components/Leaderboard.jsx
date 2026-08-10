@@ -5,11 +5,13 @@ export default function Leaderboard() {
   const [entries, setEntries] = useState([])
   const [error, setError] = useState('')
 
+  const endpoint = `${getApiBaseUrl()}/leaderboard`
+
   useEffect(() => {
-    fetchApi('leaderboard')
+    fetchApi(endpoint)
       .then(setEntries)
       .catch((err) => setError(err.message))
-  }, [])
+  }, [endpoint])
 
   return (
     <section>

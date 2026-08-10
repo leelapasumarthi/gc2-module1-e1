@@ -13,7 +13,7 @@ const normalizeResponse = (payload) => {
 
 export const getApiBaseUrl = () => API_BASE_URL
 export const fetchApi = async (resource) => {
-  const url = `${API_BASE_URL}/${resource}`
+  const url = resource.startsWith('http') ? resource : `${API_BASE_URL}/${resource}`
   const response = await fetch(url)
   if (!response.ok) {
     throw new Error(`API request failed with ${response.status}`)

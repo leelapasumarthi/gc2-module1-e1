@@ -5,11 +5,13 @@ export default function Workouts() {
   const [workouts, setWorkouts] = useState([])
   const [error, setError] = useState('')
 
+  const endpoint = `${getApiBaseUrl()}/workouts`
+
   useEffect(() => {
-    fetchApi('workouts')
+    fetchApi(endpoint)
       .then(setWorkouts)
       .catch((err) => setError(err.message))
-  }, [])
+  }, [endpoint])
 
   return (
     <section>
