@@ -1,17 +1,29 @@
 import express from 'express'
 import mongoose from 'mongoose'
+import apiRouter from './routes'
 
 const app = express()
 app.use(express.json())
 
-const PORT = process.env.PORT || 8000
+const PORT = Number(process.env.PORT || 8000)
 const MONGO_HOST = process.env.MONGO_HOST || 'localhost'
 const MONGO_PORT = process.env.MONGO_PORT || '27017'
-const DB_NAME = process.env.DB_NAME || 'octofit'
+const DB_NAME = process.env.DB_NAME || 'octofit_db'
 const MONGO_URI = `mongodb://${MONGO_HOST}:${MONGO_PORT}/${DB_NAME}`
 
+const CODESPACE_NAME = process.env.CODESPACE_NAME
+const API_HOST = CODESPACE_NAME ? `${CODESPACE_NAME}-8000.githubpreview.dev` : `localhost`
+const API_BASE_URL = `http://${API_HOST}:${PORT}`
+
+app.use('/api', apiRouter)
+
 app.get('/', (req, res) => {
-  res.json({status: 'ok', env: { port: PORT }})
+  res.json({
+    status: 'ok',
+    port: PORT,
+    apiBaseUrl: API_BASE_URL,
+    mongoUri: MONGO_URI
+  })
 })
 
 async function start() {
